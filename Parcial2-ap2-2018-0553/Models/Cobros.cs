@@ -20,5 +20,17 @@ namespace Parcial2_ap2_2018_0553.Models
 
         [ForeignKey("CobroId")]
         public virtual List<CobrosDetalle> Detalle { get; set; }
+
+        public Cobros()
+        {
+            CobroId = 0;
+            Fecha = DateTime.Now;
+            Totales = 0;
+            TotalCobro = 0;
+            Observaciones = string.Empty;
+            ClienteId = 0;
+            Cliente = new Clientes();
+            Detalle = new List<CobrosDetalle>();
+        }
     }
 }
