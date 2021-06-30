@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-header" style="background-color: #90C2E7">
-            <h1 style="color:black;">Registro de Cobros</h1>
+            <h1 style="color:black; text-align: center; font-family: 'Times New Roman'; font-style: italic;">Registro de Cobros</h1>
         </div>
         <div class="card-body">
 
@@ -50,16 +50,19 @@
                 <ValidationMessage For="(() => Cobro.ClienteId)" />
             </div>
 
+            <div class="card-header" style="background-color: #90C2E7;">
+                <h2 style="color:black; font-family: 'Times New Roman'">Cobros Detalle</h2>
+            </div>
             <div class="table-responsive text-nowrap" style="position: relative; height:200px; overflow: auto; display: block;">
                 <table class="table table-striped">
                     <thead style="background-color: lightseagreen;">
                         <tr>
-                            <th>Id</th>
-                            <th>Fecha</th>
-                            <th>Monto</th>
-                            <th>Balance</th>
-                            <th>Cobrado</th>
-                            <th>Pagar</th>
+                            <th style="font-family: 'Courier New'">Id</th>
+                            <th style="font-family: 'Courier New'">Fecha</th>
+                            <th style="font-family: 'Courier New'">Monto</th>
+                            <th style="font-family: 'Courier New'">Balance</th>
+                            <th style="font-family: 'Courier New'">Cobrado</th>
+                            <th style="font-family: 'Courier New'">Pagar</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white" style="background-color: floralwhite">
@@ -72,7 +75,6 @@
                                 <td>@item.Venta.Balance</td>
                                 <td>@item.Cobrado</td>
                                 <th><input type="checkbox" /></th>
-
                             </tr>
                         }
                     </tbody>
