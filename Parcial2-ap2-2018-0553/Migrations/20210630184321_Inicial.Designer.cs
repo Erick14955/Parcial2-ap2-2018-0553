@@ -9,7 +9,7 @@ using Parcial2_ap2_2018_0553.DAL;
 namespace Parcial2_ap2_2018_0553.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210628185309_Inicial")]
+    [Migration("20210630184321_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,23 @@ namespace Parcial2_ap2_2018_0553.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            ClienteId = 1,
+                            Nombres = "FERRETERIA GAMA"
+                        },
+                        new
+                        {
+                            ClienteId = 2,
+                            Nombres = "AVALON DISCO"
+                        },
+                        new
+                        {
+                            ClienteId = 3,
+                            Nombres = "PRESTAMOS CEFIPROD"
+                        });
                 });
 
             modelBuilder.Entity("Parcial2_ap2_2018_0553.Models.Cobros", b =>
@@ -105,6 +122,56 @@ namespace Parcial2_ap2_2018_0553.Migrations
                     b.HasKey("VentaId");
 
                     b.ToTable("Ventas");
+
+                    b.HasData(
+                        new
+                        {
+                            VentaId = 1,
+                            Balance = 1000.0,
+                            ClienteId = 1,
+                            Fecha = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 1000.0
+                        },
+                        new
+                        {
+                            VentaId = 2,
+                            Balance = 800.0,
+                            ClienteId = 1,
+                            Fecha = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 900.0
+                        },
+                        new
+                        {
+                            VentaId = 3,
+                            Balance = 2000.0,
+                            ClienteId = 2,
+                            Fecha = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 2000.0
+                        },
+                        new
+                        {
+                            VentaId = 4,
+                            Balance = 1800.0,
+                            ClienteId = 2,
+                            Fecha = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 1900.0
+                        },
+                        new
+                        {
+                            VentaId = 5,
+                            Balance = 3000.0,
+                            ClienteId = 3,
+                            Fecha = new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 3000.0
+                        },
+                        new
+                        {
+                            VentaId = 6,
+                            Balance = 1900.0,
+                            ClienteId = 3,
+                            Fecha = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Monto = 2900.0
+                        });
                 });
 
             modelBuilder.Entity("Parcial2_ap2_2018_0553.Models.Cobros", b =>

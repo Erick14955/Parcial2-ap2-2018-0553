@@ -86,6 +86,51 @@ namespace Parcial2_ap2_2018_0553.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Nombres" },
+                values: new object[] { 1, "FERRETERIA GAMA" });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Nombres" },
+                values: new object[] { 2, "AVALON DISCO" });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "ClienteId", "Nombres" },
+                values: new object[] { 3, "PRESTAMOS CEFIPROD" });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 1, 1000.0, 1, new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1000.0 });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 2, 800.0, 1, new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 900.0 });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 3, 2000.0, 2, new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2000.0 });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 4, 1800.0, 2, new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1900.0 });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 5, 3000.0, 3, new DateTime(2020, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3000.0 });
+
+            migrationBuilder.InsertData(
+                table: "Ventas",
+                columns: new[] { "VentaId", "Balance", "ClienteId", "Fecha", "Monto" },
+                values: new object[] { 6, 1900.0, 3, new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2900.0 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cobros_ClienteId",
                 table: "Cobros",
