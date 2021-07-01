@@ -221,6 +221,9 @@
 
     private void Ventaspendientes()
     {
+        Cobro.Totales = 0;
+        Cobro.TotalCobro = 0;
+        Cobro.Observaciones = string.Empty;
         Cobro.Detalle = VentasBLL.VentasPendientes(Cobro.ClienteId);
     }
 }
