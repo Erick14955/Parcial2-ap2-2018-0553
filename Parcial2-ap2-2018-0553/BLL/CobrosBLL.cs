@@ -103,10 +103,24 @@ namespace Parcial2_ap2_2018_0553.BLL
             try
             {
                 var cobros = Buscar(id);
+                if (cobros != null)
+                {
+                    contexto.Cobros.Remove(cobros);
+                    Eliminado = contexto.SaveChanges() > 0;
 
-                contexto.Entry(cobros).State = EntityState.Deleted;
-                Eliminado = (contexto.SaveChanges() > 0);
-
+                    if (Eliminado)
+                    {
+                        foreach (var cobroDetalle in cobros.Detalle)
+                        {
+                            var venta = VentasBLL.Buscar(cobroDetalle.VentaId);
+                            if (venta != null)
+                            {
+                                venta.Balance += cobroDetalle.Cobrado;
+                                VentasBLL.Guardar(venta);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception)
             {
