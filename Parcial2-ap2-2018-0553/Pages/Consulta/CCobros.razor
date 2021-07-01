@@ -36,6 +36,56 @@
             </div>
         </div>
     </div>
+
+    @if (ListaCobros == null)
+            {
+                <div class="form-group">
+                    <h2>No existen cobros en la base de datos</h2>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Cobro Id</th>
+                                <th>Fecha</th>
+                                <th>Cliente Id</th>
+                                <th>Totales</th>
+                                <th>Total Cobrado</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!string.IsNullOrEmpty(TotalCobrado.ToString()))
+                                TotalCobrado = 0;
+
+                            @foreach(var cont in ListaCobros)
+                {
+                    <tr>
+                        <td>@cont.CobroId</td>
+                        <td>@cont.Fecha</td>
+                        <td>@cont.ClienteId</td>
+                        <td>@cont.Totales</td>
+                        <td>@cont.TotalCobro</td>
+                        <td>@cont.Observaciones</td>
+
+                        <button class="btn btn-danger" @onclick="() =>Eliminar(cont.CobroId)">
+                            <i class="oi oi-trash" aria-hidden="true"></i>
+                        </button>
+                    </tr>
+                                TotalCobrado += cont.TotalCobro;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+</div>
+<div class="card-footer">
+    <div class="form-group text-left">
+        <label>Balance total: @TotalCobrado</label>
+    </div>
 </div>
 
 @code {
