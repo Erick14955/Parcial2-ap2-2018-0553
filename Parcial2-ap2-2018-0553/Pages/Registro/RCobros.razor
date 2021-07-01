@@ -207,10 +207,12 @@
         {
             cobro.Cobrado += cobro.Venta.Balance;
             Cobro.TotalCobro += cobro.Venta.Balance;
+            cobro.Venta.Balance -= Cobro.TotalCobro;
             Cobro.Totales++;
         }
         else
         {
+            cobro.Venta.Balance += cobro.Cobrado;
             cobro.Cobrado -= cobro.Venta.Balance;
             Cobro.TotalCobro -= cobro.Venta.Balance;
             Cobro.Totales--;
