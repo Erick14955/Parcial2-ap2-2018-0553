@@ -46,6 +46,13 @@ namespace Parcial2_ap2_2018_0553.BLL
 
             try
             {
+                foreach(var item in cobros.Detalle)
+                {
+                    item.Venta = contexto.Ventas.Find(item.VentaId);
+                    item.Venta.Balance -= item.Cobrado;
+                    contexto.Entry(item.Venta).State = EntityState.Modified;
+                }
+
                 contexto.Cobros.Add(cobros);
                 Insertado = (contexto.SaveChanges() > 0);
             }

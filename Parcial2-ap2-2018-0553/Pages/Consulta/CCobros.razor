@@ -1,0 +1,42 @@
+﻿@page "/CCobros"
+
+@using Parcial2_ap2_2018_0553.Models;
+
+<div class="card accordion">
+    <div class="card header" style="background-color: #90C2E7">
+        <h1 style="color:black; text-align: center; font-family: 'Times New Roman'; font-style: italic;">Consulta de Cobros</h1>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col form-group">
+                <label>Filtrar por</label>
+                <select @bind="Index" class="custom-select">
+                    <option value="-1" disabled>Seleccionar opci&oacute;n</option>
+                    <option value="0">Todo</option>
+                    <option value="1">Cobro Id</option>
+                    <option value="2">Cliente id</option>
+                </select>
+            </div>
+
+            <div class="col form-group">
+                <label>Criterio</label>
+                <div class="input-group">
+                    <input class="form-control" type="@(Index == 1 || Index == 2 ? "number" : "text")" @bind-value="Criterio" placeholder="Ingrese el criterio a filtrar para obtener la venta deseada" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" @onclick="Buscar">
+                            <i class="oi oi-magnifying-glass"/> Filtrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public int Index = -1;
+    public double TotalCobrado;
+    public string Criterio;
+    List<Cobros> ListaCobros = new List<Cobros>();
+}

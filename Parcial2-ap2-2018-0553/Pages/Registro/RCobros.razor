@@ -40,14 +40,13 @@
 
             <div class="form-group">
                 <label>Cliente</label>
-                <InputSelect @bind-Value="Cobro.ClienteId" class="form-control">
+                <InputSelect @bind-Value="Cobro.ClienteId" class="form-control" @onclick="Ventaspendientes">
                     <option value="0" disabled selected>Seleccionar Cliente</option>
                     @foreach (var item in ListaClientes)
                     {
                         <option value="@item.ClienteId">@item.Nombres</option>
                     }
                 </InputSelect>
-                <ValidationMessage For="(() => Cobro.ClienteId)" />
             </div>
 
             <div class="card-header" style="background-color: #90C2E7;">
@@ -74,12 +73,13 @@
                                 <td>@item.Venta.Monto</td>
                                 <td>@item.Venta.Balance</td>
                                 <td>@item.Cobrado</td>
-                                <th><input type="checkbox" /></th>
+                                <th><input type="checkbox" @onchange="@(() => cobrar(item))"/></th>
                             </tr>
-                        }
+                         }
                     </tbody>
                 </table>
-
+            </div>
+            <div class="form-group">
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="form-group row m-1">
@@ -99,9 +99,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Observaciones</label>
-                        <InputText @bind-Value="Cobro.Observaciones" class="form-control" row="5" placeholder="Observaciones"/>
+                    <div class="border-info">
+                        <h5>Observaciones</h5>
+                        <InputTextArea @bind-Value="Cobro.Observaciones" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -137,21 +137,88 @@
     {
         Nuevo();
     }
-
+    public void Buscar()
+    {
+        if(Cobro.CobroId > 0)
+        {
+            var encontrado = CobrosBLL.Buscar(Cobro.CobroId);
+            if(encontrado != null)
+            {
+                this.Cobro = encontrado;
+            }
+            else
+            {
+                Toast.ShowWarning("No encontrado");
+            }
+        }
+        else
+        {
+            Toast.ShowWarning("Debe ingresar un id valido para buscar cobro");
+        }
+    }
     public void Nuevo()
     {
         Cobro = new Cobros();
+        ListaClientes = ClientesBLL.GetList(c => true);
+        Cobro.Fecha = DateTime.Now;
     }
     public void Eliminar()
     {
+        bool elimino;
+        elimino = CobrosBLL.Eliminar(Cobro.CobroId);
 
-    }
-    public void Buscar()
-    {
-
+        if (elimino)
+        {
+            Nuevo();
+            Toast.ShowSuccess("Se ha eliminado correctamente");
+        }
+        else
+        {
+            Toast.ShowWarning("No fue posible eliminar");
+        }
     }
     public void Guardar()
     {
+        bool guardo;
+        if(Cobro.CobroId == 0)
+        {
+            Cobro.Detalle.RemoveAll(e => e.Cobrado == 0);
+            guardo = CobrosBLL.Guardar(Cobro);
 
+            if (guardo)
+            {
+                Nuevo();
+                Toast.ShowSuccess("Se ha guardado correctamente");
+            }
+            else
+            {
+                Toast.ShowWarning("No fue posible guardar este cobro");
+            }
+        }
+        else
+        {
+            Toast.ShowWarning("No se pueden modificar los cobros");
+        }
+    }
+
+    private void cobrar(CobrosDetalle cobro)
+    {
+        if(cobro.Cobrado == 0)
+        {
+            cobro.Cobrado += cobro.Venta.Balance;
+            Cobro.TotalCobro += cobro.Venta.Balance;
+            Cobro.Totales++;
+        }
+        else
+        {
+            cobro.Cobrado -= cobro.Venta.Balance;
+            Cobro.TotalCobro -= cobro.Venta.Balance;
+            Cobro.Totales--;
+        }
+    }
+
+    private void Ventaspendientes()
+    {
+        Cobro.Detalle = VentasBLL.VentasPendientes(Cobro.ClienteId);
     }
 }
